@@ -1,14 +1,11 @@
 package edu.ynu.se.xiecheng.achitectureclass.common.dao;
-
 import edu.ynu.se.xiecheng.achitectureclass.common.entity.LogicEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.io.Serializable;
-
 @NoRepositoryBean
 public interface LogicDAO<T extends LogicEntity, ID extends Serializable> extends JpaRepository<T, ID> {
     @Override
@@ -18,7 +15,7 @@ public interface LogicDAO<T extends LogicEntity, ID extends Serializable> extend
                     "where e.id = ?1 and e.isDeleted = 0")
     @Transactional
     @Modifying
-    void deleteById(ID id);;
+    void deleteById(ID id);
 
     @Override
     @Transactional

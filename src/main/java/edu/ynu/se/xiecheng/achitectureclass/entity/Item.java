@@ -1,8 +1,8 @@
 package edu.ynu.se.xiecheng.achitectureclass.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import edu.ynu.se.xiecheng.achitectureclass.common.entity.LogicEntity;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Where;
@@ -14,17 +14,18 @@ import java.util.Set;
 @Getter
 @Setter
 @Where(clause = "is_deleted = 0")
-public class Course extends LogicEntity {
+//上架商品
+public class Item extends LogicEntity{
     @Column
-    private String courseName;
+    private String name;
     @Column
-    private Integer creditHours;
-    @Column
-    private String credit;
-
-    @OneToMany(mappedBy = "course",
+    private Double guidePrice;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Business business;
+    @OneToMany(mappedBy = "item",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("course")
-    private Set<TClass> clses;
+    @JsonIgnore
+    private Set<ShopItem> shopItems;
 }
